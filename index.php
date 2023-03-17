@@ -20,6 +20,7 @@
 session_start();
 include 'lib/dbConnect.php';
 $bd = new DbConnect();
+$conn = $bd->connect();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,69 +63,121 @@ $bd = new DbConnect();
 
     <div class="container">
       <div class="left-content">
-      <h1>Dernière actualité</h1>
+        <h1>Dernière actualité</h1>
         <div class="last-actu">
-          <div class="last-actu-content">
-            <div class="last-actu-image">
-              <img class="imgactu" src="images/dbz.jpg" alt="Image de l'actualité">
+          <?php
+
+          $sql = "SELECT * FROM article ORDER BY datePublication DESC LIMIT 1";
+          $result = $conn->prepare($sql);
+          $result->execute();
+          foreach ($result as $last) {
+          ?>
+            <div class="last-actu-content">
+              <div class="last-actu-image">
+                <img class="imgactu" src="images/<?php echo $last['image'] ?>" alt="Image de l'actualité">
+              </div>
+              <div class="last-actu-text">
+                <h2><?php echo $last['titre'] ?></h2>
+                <?php
+                $idCat = $last['idCate'];
+                $sql = "SELECT libelle FROM categorie WHERE id= :id";
+                $req = $conn->prepare($sql);
+                $req->bindParam(':id', $idCat);
+                $req->execute();
+                $cate = $req->fetch(PDO::FETCH_ASSOC);
+                echo "<p>" . $cate['libelle'] . "</p>";
+
+
+                echo "<p>" . $last['datePublication'] . "</p>";
+                echo substr($last['contenu'], 0, 300) . "...";
+                ?>
+              </div>
             </div>
-            <div class="last-actu-text">
-              <h3>News Budokai tenkaichi 4</h3>
-              <p>Description de l'actualité</p>
-            </div>
-          </div>
         </div>
-        <div class="text">
-          <h1>À voir aussi</h1>
-          <br>
-        </div>
-        <div class="third-content">
+
+      <?php
+          }
+      ?>
+
+
+
+
+
+      <div class="text">
+        <h1>À voir aussi</h1>
+        <br>
+      </div>
+      <div class="third-content">
+        <?php
+
+        $sql = "select * from ( select *, row_number() over (order by id DESC) RowNumber from article ) tt where RowNumber != 1;";
+        $result = $conn->prepare($sql);
+        $result->execute();
+        foreach ($result as $last) {
+        ?>
+
           <div class="third-image">
-            <img src="images/Minecraft.jpg" alt="Image 1">
-            <h3>Minecraft mise à jour 1.10</h3>
-            <p>Description de l'image 1</p>
+            <img src="images/<?php echo $last['image'] ?>" alt="Image 1">
+            <h4><?php echo $last['titre'] ?></h3>
+              <?php
+              $idCat = $last['idCate'];
+              $sql = "SELECT libelle FROM categorie WHERE id= :id";
+              $req = $conn->prepare($sql);
+              $req->bindParam(':id', $idCat);
+              $req->execute();
+              $cate = $req->fetch(PDO::FETCH_ASSOC);
+              echo "<p>" . $cate['libelle'] . "</p>";
+              ?>
           </div>
-          <div class="third-image">
-            <img src="images/genshin.jpg" alt="Image 2">
-            <h3>Nouveauté Genshin</h3>
-            <p>Description de l'image 2</p>
-          </div>
-          <div class="third-image">
-            <img src="images/jeux1.jpg" alt="Image 3">
-            <h3>Titre de l'image 3</h3>
-            <p>Description de l'image 3</p>
-          </div>
-        </div>
+
+        <?php
+        }
+        ?>
+
+      </div>
 
       </div>
       <div class="right-content">
 
-          <h2>Twitch de ChizuSama_</h2>
-          <div class="right-image">
-            <iframe src="https://player.twitch.tv/?channel=chizusama_&parent=localhost&muted=true" height="240" width="100%" allowfullscreen>
-            </iframe>
-            
-          </div>
+        <h2>Twitch de ChizuSama_</h2>
+        <div class="right-image">
+          <iframe src="https://player.twitch.tv/?channel=chizusama_&parent=localhost&muted=true" height="240" width="100%" allowfullscreen>
+          </iframe>
+
+        </div>
 
         <div class="right-image">
-        <h2>Caté 1</h2>
-          <img src="images/sao.jpg" alt="Image">
-          <p>Petite description de la section</p>
+          <h2>Anime</h2>
+          <?php
+
+          $sql = "SELECT * FROM `article` WHERE idCate = 2 ORDER BY RAND ( ) LIMIT 1";
+          $result = $conn->prepare($sql);
+          $result->execute();
+          foreach ($result as $last) {
+          ?>
+            <img src="images/<?php echo $last['image'] ?>" alt="Image">
+            <p><?php echo $last['titre'] ?></p>
         </div>
-        
-        
-        <div class="right-image">
-        <h2>Caté 2</h2>
-          <img src="images/chronicle.jpg" alt="Image">
-          <p>Petite description de la section</p>
+      <?php
+          }
+      ?>
+
+<div class="right-image">
+          <h2>Gaming</h2>
+          <?php
+
+          $sql = "SELECT * FROM `article` WHERE idCate = 1 ORDER BY RAND ( ) LIMIT 1";
+          $result = $conn->prepare($sql);
+          $result->execute();
+          foreach ($result as $last) {
+          ?>
+            <img src="images/<?php echo $last['image'] ?>" alt="Image">
+            <p><?php echo $last['titre'] ?></p>
         </div>
-        
-        
-        <div class="right-image">
-        <h2>Caté 3</h2>
-          <img src="images/genshin.jpg" alt="Image">
-          <p>Petite description de la section</p>
-        </div>
+      <?php
+          }
+      ?>
+
 
       </div>
 
