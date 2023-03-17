@@ -25,8 +25,3 @@ if ($_SESSION["Modo"] == FALSE) {
 }
 ?>
 
-Une première vidéo promotionnelle pour l'anime Suki na Ko ga Megane wo Wasureta (The Girl I Like Forgot Her Glasses) vient d'être dévoilée. 
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/NUdOX4W4dxc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-De plus, nous apprenons que la série animée débutera sa diffusion en juillet 2023 au Japon.

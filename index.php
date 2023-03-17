@@ -72,6 +72,7 @@ $conn = $bd->connect();
           $result->execute();
           foreach ($result as $last) {
           ?>
+          <a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
             <div class="last-actu-content">
               <div class="last-actu-image">
                 <img class="imgactu" src="images/<?php echo $last['image'] ?>" alt="Image de l'actualité">
@@ -91,7 +92,7 @@ $conn = $bd->connect();
               </div>
             </div>
         </div>
-
+        </a>
       <?php
           }
       ?>
@@ -112,7 +113,7 @@ $conn = $bd->connect();
         $result->execute();
         foreach ($result as $last) {
         ?>
-
+<a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
           <div class="third-image">
             <img src="images/<?php echo $last['image'] ?>" alt="Image 1">
             <h4><?php echo $last['titre'] ?></h3>
@@ -125,8 +126,9 @@ $conn = $bd->connect();
               $cate = $req->fetch(PDO::FETCH_ASSOC);
               echo "<p>" . $cate['libelle'] . "</p>";
               ?>
+              </a>
           </div>
-
+        
         <?php
         }
         ?>
@@ -152,8 +154,10 @@ $conn = $bd->connect();
           $result->execute();
           foreach ($result as $last) {
           ?>
+          <a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
             <img src="images/<?php echo $last['image'] ?>" alt="Image">
             <p><?php echo $last['titre'] ?></p>
+          </a>
         </div>
       <?php
           }
@@ -168,8 +172,10 @@ $conn = $bd->connect();
           $result->execute();
           foreach ($result as $last) {
           ?>
+          <a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
             <img src="images/<?php echo $last['image'] ?>" alt="Image">
             <p><?php echo $last['titre'] ?></p>
+            </a>
         </div>
       <?php
           }

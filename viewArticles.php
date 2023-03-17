@@ -16,54 +16,64 @@
 ⣩⠅⠄⠄⢺⠿⠛⢦⣇⢠⠈⣨⣾⣷⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣥⣤
 ⣣⣴⣇⢸⠟⣄⣀⣸⣿⣿⣿⣿⣿⣯⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠺⣿⣦⣄⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢠⣶⣶⢿⣿⣿⣿⣟⣿⢿⣿⣿⣿⣿⣿⣿ 
 -->
-<div class="container1">
+<?php
+session_start();
+include 'lib/dbConnect.php';
+$bd = new DbConnect();
+$conn = $bd->connect();
 
-<nav class="menu-container">
-    <!-- menu burger -->
-    <input type="checkbox" aria-label="Toggle menu" />
-    <span></span>
-    <span></span>
-    <span></span>
-  
-    <!-- logo -->
-    <a href="" class="menu-logo">
-      <img src="images/s.png" alt="My Awesome Website"/>
-    </a>
-  
-    <!-- menu liens -->
-    <div class="menu">
-      <ul>
-        <li><a href="index.php">Accueil</a></li>
+$idArt = $_GET['idArticle'];
 
-        <li><a href="news.php">Actualités</a></li>
+$sql = "SELECT * FROM article WHERE id= :id";
+                $req = $conn->prepare($sql);
+                $req->bindParam(':id', $idArt);
+                $req->execute();
+                $art = $req->fetch(PDO::FETCH_ASSOC);
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="styles/articlesView.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $art['titre'] ?></title>
+</head>
+<body>
+    <div class="background">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
 
-        <li><a href="#docs">Contact</a></li>
-        <?php
-        if (isset($_SESSION["Modo"])) {
-          if($_SESSION["Modo"] == TRUE){
-          echo "<li><a href='createPost.php'>Crée un post</a></li>";
-          }}
-        ?>
-      </ul>
-      <ul>
-        <?php
-        
-        if (isset($_SESSION["User"])) {
-          echo "<li><a>Hello, ". $_SESSION["Username"] . "</a></li>";
-          echo "<li><a href='login_register/logout.php'>Déco</a></li>";
-        }else{
-          ?>
-      
-        <li><a href="register-form.php">S'inscrire</a></li>
-
-        <li><a href="login-form.php">Connexion</a></li>
-        <?php
-      }
-      
-      ?>
-      </ul>
+        <?php require_once "lib/navbar.php" ?>
+    <div class="containerArticle">
+        <div>
+        <h1 class="titreArticle"><?php echo $art['titre'] ?></h1>
+        <img class="viewArticle" src="images/<?php echo $art['image'] ?>" alt="Image" class="image">
+        <p class="textArticle"><?php echo $art['datePublication'] ?></p>
+        <?php echo $art['contenu'] ?>
+        </div>
     </div>
-  </nav>
-
-
-</div>
+    </div>
+</body>
+</html>

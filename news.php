@@ -16,54 +16,94 @@
 ⣩⠅⠄⠄⢺⠿⠛⢦⣇⢠⠈⣨⣾⣷⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣯⣥⣤
 ⣣⣴⣇⢸⠟⣄⣀⣸⣿⣿⣿⣿⣿⣯⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠺⣿⣦⣄⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢠⣶⣶⢿⣿⣿⣿⣟⣿⢿⣿⣿⣿⣿⣿⣿ 
 -->
-<div class="container1">
+<?php
+session_start();
+include 'lib/dbConnect.php';
+$bd = new DbConnect();
+$conn = $bd->connect();
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-<nav class="menu-container">
-    <!-- menu burger -->
-    <input type="checkbox" aria-label="Toggle menu" />
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="styles/main.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accueil</title>
+</head>
+
+<body>
+  <div class="background">
     <span></span>
     <span></span>
     <span></span>
-  
-    <!-- logo -->
-    <a href="" class="menu-logo">
-      <img src="images/s.png" alt="My Awesome Website"/>
-    </a>
-  
-    <!-- menu liens -->
-    <div class="menu">
-      <ul>
-        <li><a href="index.php">Accueil</a></li>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
+    <span></span>
 
-        <li><a href="news.php">Actualités</a></li>
+    <?php require_once "lib/navbar.php" ?>
 
-        <li><a href="#docs">Contact</a></li>
+
+    <div class="container">
+      <div class="news-content">
+      
+      <div class="news">
         <?php
-        if (isset($_SESSION["Modo"])) {
-          if($_SESSION["Modo"] == TRUE){
-          echo "<li><a href='createPost.php'>Crée un post</a></li>";
-          }}
+
+        $sql = "select * from article order by id DESC";
+        $result = $conn->prepare($sql);
+        $result->execute();
+        foreach ($result as $last) {
         ?>
-      </ul>
-      <ul>
-        <?php
+<a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
+          <div class="news-image">
+            <div>
+            <img src="images/<?php echo $last['image'] ?>" alt="Image 1">
+            </div>
+            <div>
+            <h4><?php echo $last['titre'] ?></h3>
+              <?php
+              $idCat = $last['idCate'];
+              $sql = "SELECT libelle FROM categorie WHERE id= :id";
+              $req = $conn->prepare($sql);
+              $req->bindParam(':id', $idCat);
+              $req->execute();
+              $cate = $req->fetch(PDO::FETCH_ASSOC);
+              echo "<p>" . $cate['libelle'] . "</p>";
+              ?>
+              </a>
+              </div>
+          </div>
         
-        if (isset($_SESSION["User"])) {
-          echo "<li><a>Hello, ". $_SESSION["Username"] . "</a></li>";
-          echo "<li><a href='login_register/logout.php'>Déco</a></li>";
-        }else{
-          ?>
-      
-        <li><a href="register-form.php">S'inscrire</a></li>
-
-        <li><a href="login-form.php">Connexion</a></li>
         <?php
-      }
-      
-      ?>
-      </ul>
-    </div>
-  </nav>
+        }
+        ?>
+
+      </div>
+
+      </div>
+  </div>
 
 
-</div>
+
+</body>
+<script src="js/navbar.js"></script>
+
+</html>
