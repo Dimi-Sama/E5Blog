@@ -63,7 +63,7 @@ $conn = $bd->connect();
 
     <div class="container">
       <div class="left-content">
-        <h1>Dernière actualité</h1>
+        <h1>Dernières actualités</h1>
         <div class="last-actu">
           <?php
 
@@ -86,10 +86,7 @@ $conn = $bd->connect();
                 $req->execute();
                 $cate = $req->fetch(PDO::FETCH_ASSOC);
                 echo "<p>" . $cate['libelle'] . "</p>";
-
-
                 echo "<p>" . $last['datePublication'] . "</p>";
-                echo substr($last['contenu'], 0, 300) . "...";
                 ?>
               </div>
             </div>
@@ -110,7 +107,7 @@ $conn = $bd->connect();
       <div class="third-content">
         <?php
 
-        $sql = "select * from ( select *, row_number() over (order by id DESC) RowNumber from article ) tt where RowNumber != 1;";
+        $sql = "select * from ( select *, row_number() over (order by id DESC) RowNumber from article ) tt where RowNumber != 1 LIMIT 3";
         $result = $conn->prepare($sql);
         $result->execute();
         foreach ($result as $last) {
