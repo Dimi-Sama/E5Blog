@@ -108,7 +108,7 @@ $conn = $bd->connect();
       <div class="third-content">
         <?php
 
-        $sql = "select * from ( select *, row_number() over (order by id DESC) RowNumber from article ) tt where RowNumber != 1 LIMIT 3";
+        $sql = "select * from ( select *, row_number() over (order by datePublication DESC) RowNumber from article ) tt where RowNumber != 1 LIMIT 3";
         $result = $conn->prepare($sql);
         $result->execute();
         foreach ($result as $last) {
