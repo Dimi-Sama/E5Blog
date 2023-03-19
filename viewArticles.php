@@ -71,7 +71,6 @@ $sql = "SELECT * FROM article WHERE id= :id";
         <h1 class="titreArticle"><?php echo $art['titre'] ?></h1>
         <img class="viewArticle" src="images/<?php echo $art['image'] ?>" alt="Image" class="image">
         <p class="textArticle"><?php echo $art['datePublication'] ?></p>
-        <?php echo $art['contenu'] ?>
         <?php 
 
                 if(!isset($_SESSION['User'])){
