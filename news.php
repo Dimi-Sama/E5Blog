@@ -67,20 +67,20 @@ $conn = $bd->connect();
       <div class="news">
         <?php
 
-        $offset = 0;
-        if(isset($_GET['page'])){
-          $page = $_GET['page'];
-          $offset = $_GET['page'] * 10;
-        }else{
-            $page = 0;
-            $offset = 0;
-        }
+$offset = 0;
+if(isset($_GET['page'])){
+  $page = $_GET['page'];
+  $offset = $_GET['page'] * 10;
+}else{
+    $page = 0;
+    $offset = 0;
+}
 
-        $sql = "select * from article order by datePublication DESC LIMIT 10 OFFSET :off;";
-        $result = $conn->prepare($sql);
-        $result->bindParam(':off',$offset,PDO::PARAM_INT);
-        $result->execute();
-        $count = $result->rowCount();
+$sql = "select * from article order by datePublication DESC LIMIT 10 OFFSET :off;";
+$result = $conn->prepare($sql);
+$result->bindParam(':off',$offset,PDO::PARAM_INT);
+$result->execute();
+$count = $result->rowCount();
         foreach ($result as $last) {
         ?>
 <a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
@@ -98,11 +98,11 @@ $conn = $bd->connect();
               $req->execute();
               $cate = $req->fetch(PDO::FETCH_ASSOC);
               echo "<p>" . $cate['libelle'] . "</p>";
-
               ?>
               </a>
               </div>
           </div>
+        
         <?php
         }
         if(!isset($_GET['page']) || $_GET['page'] == 0 && $count >= 10){

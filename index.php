@@ -75,7 +75,7 @@ $conn = $bd->connect();
           <a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
             <div class="last-actu-content">
               <div class="last-actu-image">
-                <img class="imgactu" src="images/<?php echo $last['image'] ?>" alt="Image de l'actualité">
+                <img class="imgactu" src="images/<?php echo $last['image']  ?>" alt="">
               </div>
               <div class="last-actu-text">
                 <h2><?php echo $last['titre'] ?></h2>
@@ -86,8 +86,13 @@ $conn = $bd->connect();
                 $req->bindParam(':id', $idCat);
                 $req->execute();
                 $cate = $req->fetch(PDO::FETCH_ASSOC);
-                echo "<p>" . $cate['libelle'] . "</p>";
-                echo "<p>" . $last['datePublication'] . "</p>";
+                if(isset($cate['id'])){
+                  echo "<p>" . $cate['libelle'] . "</p>";
+                  echo "<p>" . $last['datePublication'] . "</p>";
+                  echo "<p>" . $last['image'] . "</p>";
+                }
+            
+               
                 ?>
               </div>
             </div>
@@ -108,7 +113,7 @@ $conn = $bd->connect();
       <div class="third-content">
         <?php
 
-        $sql = "select * from ( select *, row_number() over (order by datePublication DESC) RowNumber from article ) tt where RowNumber != 1 LIMIT 3";
+        $sql = "select * from ( select *, row_number() over (order by id DESC) RowNumber from article ) tt where RowNumber != 1 LIMIT 3";
         $result = $conn->prepare($sql);
         $result->execute();
         foreach ($result as $last) {

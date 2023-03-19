@@ -42,6 +42,7 @@
         if (isset($_SESSION["Modo"])) {
           if($_SESSION["Modo"] == TRUE){
           echo "<li><a href='createPost.php'>Crée un post</a></li>";
+          
           }}
         ?>
       </ul>

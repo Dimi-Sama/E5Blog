@@ -15,7 +15,7 @@ END//
 DELIMITER ;
 
 DELIMITER // 
--- Trigger permetant la mise à jour du nombre de likes total sur un post (incré)
+-- Trigger permetant la mise à jour du nombre de likes total sur un post 
 create trigger updateLike
 after insert on likes
 FOR EACH ROW
@@ -24,20 +24,6 @@ DECLARE count INT;
   set count = ( select count(*) from likes where idArticle = new.idArticle );
 
  update article set likeTotal = count where id = new.idArticle;
-end//
-
-DELIMITER ;
-
-DELIMITER // 
--- Trigger permetant la mise à jour du nombre de likes total sur un post (décré)
-create trigger updateLike2
-after delete on likes
-FOR EACH ROW
-begin
-DECLARE count INT;
-  set count = ( select count(*) from likes where idArticle = old.idArticle );
-
- update article set likeTotal = count where id = old.idArticle;
 end//
 
 DELIMITER ;

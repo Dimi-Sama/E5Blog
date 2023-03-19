@@ -25,14 +25,13 @@ $conn = $bd->connect();
 $idArt = $_GET['idArticle'];
 
 $sql = "SELECT * FROM article WHERE id= :id";
-$req = $conn->prepare($sql);
-$req->bindParam(':id', $idArt);
-$req->execute();
-$art = $req->fetch(PDO::FETCH_ASSOC);
+                $req = $conn->prepare($sql);
+                $req->bindParam(':id', $idArt);
+                $req->execute();
+                $art = $req->fetch(PDO::FETCH_ASSOC);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -41,7 +40,6 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $art['titre'] ?></title>
 </head>
-
 <body>
     <div class="background">
         <span></span>
@@ -68,12 +66,13 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
         <span></span>
 
         <?php require_once "lib/navbar.php" ?>
-        <div class="containerArticle">
-            <div>
-                <h1 class="titreArticle"><?php echo $art['titre'] ?></h1>
-                <img class="viewArticle" src="images/<?php echo $art['image'] ?>" alt="Image" class="image">
-                <p class="textArticle"><?php echo $art['datePublication'] ?></p>
-                <?php
+    <div class="containerArticle">
+        <div>
+        <h1 class="titreArticle"><?php echo $art['titre'] ?></h1>
+        <img class="viewArticle" src="images/<?php echo $art['image'] ?>" alt="Image" class="image">
+        <p class="textArticle"><?php echo $art['datePublication'] ?></p>
+        <?php echo $art['contenu'] ?>
+        <?php 
 
                 if(!isset($_SESSION['User'])){
                     echo " <div class='likes'><a  href='login-form.php'><img height='15px' src='https://cdn-icons-png.flaticon.com/512/1077/1077035.png'><p>  " . $art['likeTotal'] . "</p></a> </div>";
@@ -108,6 +107,6 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
     </div>
+    </div>
 </body>
-
 </html>
