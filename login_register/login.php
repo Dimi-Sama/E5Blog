@@ -44,6 +44,7 @@ if (!$line) {
         // Mémorisation des infos utilisateur
         $_SESSION["User"] = $line['id']; 
         $_SESSION["Username"] = $line['username']; 
+        
         //Test pour voir si l'utilisateur est un modérateur 
         $sql = "SELECT * FROM moderateurs WHERE idUser = :idUser";
         // Pour éviter les injections SQL

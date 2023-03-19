@@ -21,89 +21,113 @@ session_start();
 include 'lib/dbConnect.php';
 $bd = new DbConnect();
 $conn = $bd->connect();
+
+$idArticle = $_GET['idArticle'];
+
+$sql = "SELECT * FROM article WHERE id = :id";
+$req = $conn->prepare($sql);
+$req->bindParam(':id', $idArticle);
+$req->execute();
+$art = $req->fetch(PDO::FETCH_ASSOC);
+
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/main-center.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accueil</title>
+  <script src="js/tinymce/tinymce.min.js"></script>
 </head>
 
 <body>
-  <div class="background">
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-
-    <?php require_once "lib/navbar.php" ?>
 
 
-    <div class="container">
-      <div class="news-content">
-      
-      <div class="news">
-        <?php
+  <?php require_once "lib/navbar.php" ?>
 
-        $sql = "select * from article order by id DESC";
-        $result = $conn->prepare($sql);
-        $result->execute();
-        foreach ($result as $last) {
-        ?>
-<a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
-          <div class="news-image">
-            <div>
-            <img src="images/<?php echo $last['image'] ?>" alt="Image 1">
-            </div>
-            <div>
-            <h4><?php echo $last['titre'] ?></h3>
-              <?php
-              $idCat = $last['idCate'];
-              $sql = "SELECT libelle FROM categorie WHERE id= :id";
-              $req = $conn->prepare($sql);
-              $req->bindParam(':id', $idCat);
-              $req->execute();
-              $cate = $req->fetch(PDO::FETCH_ASSOC);
-              echo "<p>" . $cate['libelle'] . "</p>";
-              ?>
-              </a>
-              </div>
-          </div>
-        
-        <?php
-        }
-        ?>
-
+  <div class="container">
+    <form class="fomulaire" action="insertPost.php" method="post" enctype="multipart/form-data">
+      <div>
+        <label for="">Titre de l'article</label> <br>
+        <input value="<?php echo $art['titre'] ?>" type="text" name="titre" required>
       </div>
-
+      <div>
+        <label for="">Image de l'article</label> <br>
+        <input src="images/<?php echo $art['image'] ?>" type="file" name="image" required>
       </div>
+      <div>
+        <label for="">Catégorie de l'article</label> <br>
+
+        <?php
+        $conn = $bd->connect();
+        $sql = "SELECT id,libelle FROM categorie";
+        $req = $conn->prepare($sql);
+        $req->execute();
+        ?>
+        <select name="cate" id="" required>
+          <?php foreach ($req as $cate) {  ?>
+
+            <option value="<?= $cate['id'] ?>"> <?= $cate['libelle'] ?></option>
+
+          <?php     }  ?>
+        </select>
+      </div>
+      <div>
+        <label for="">Contenu de l'article</label>
+        <textarea name="article" cols="30" rows="10"></textarea>
+      </div>
+      <button name="update" type="submit">Modifier</button>
+    </form>
   </div>
 
+  <script type="text/javascript" language="javascript">
+    tinymce.init({
+      selector: "textarea",
+      width: 900,
+      height: 370,
+      menubar: false,
+      statusbar: false,
+      extended_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
+      plugins: 'media',
+  menubar: 'insert',
+  media_live_embeds: true
 
+    })
+  </script>
 
 </body>
-<script src="js/navbar.js"></script>
 
 </html>
+
+
+<?php 
+
+if(isset($_POST['update'])){
+
+$titre = $_POST['titre'];
+
+$img = $_FILES["image"]["name"];
+$repImg = 'images/';
+$cate = $_POST['cate'];
+$contenu = $_POST['article'];
+$user = $_SESSION["User"];
+
+$sql = "UPDATE article SET titre=:titre, contenu=:contenu, cate=:cate WHERE id=:id";
+            $req = $conn->prepare($sql);
+            $req->bindParam(':titre', $titre);
+            $req->bindParam(':contenu', $contenu);
+            $req->bindParam(':cate', $cate);
+            $req->bindParam(':id', $id);
+if($req->execute()) {
+    move_uploaded_file($_FILES['image']['tmp_name'], $repImg . $img);
+    header("Location: index.php");
+}else {
+    header("Location: updatePost.php?erreur=TRUE");
+}
+}
+?>
