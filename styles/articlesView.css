@@ -1,5 +1,5 @@
 .containerArticle {
-    max-width: 800px;
+    max-width: 900px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,6 +13,9 @@
     color: white;
     font-size: 2rem;
     margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .containerArticle  div{
     width: 90%;
@@ -24,6 +27,17 @@
     max-width: 100%;
     height: auto;
     margin-top: 2rem;
+}
+
+.likes a {
+    display: grid;
+    place-items: center;
+    grid-template-columns: repeat(2,auto);
+
+}
+
+.likes{
+    width: 5% !important;
 }
 
 .textArticle {
