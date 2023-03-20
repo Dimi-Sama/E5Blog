@@ -70,7 +70,7 @@ $sql = "SELECT * FROM article WHERE id= :id";
         <div>
         <h1 class="titreArticle"><?php echo $art['titre'] ?></h1>
         <img class="viewArticle" src="images/<?php echo $art['image'] ?>" alt="Image" class="image">
-        <p class="textArticle"><?php echo $art['datePublication'] ?></p>
+        <p class="textArticle"><?php 	setlocale(LC_TIME, 'fr'); echo ucfirst(strftime('%d %B %Y à %R',strtotime($art['datePublication'])));  ?></p>
         <?php 
 
                 if(!isset($_SESSION['User'])){
