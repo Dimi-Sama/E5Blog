@@ -1,4 +1,11 @@
 <?php
+/**
+ * This script handles the like/unlike functionality for articles.
+ * It receives the user id and article id through GET parameters.
+ * If the 'like' parameter is not set or empty, it inserts a new like record in the database.
+ * If the 'like' parameter is set, it deletes the like record from the database.
+ * After the operation is completed, it redirects the user to the article view page.
+ */
 require "lib/dbConnect.php";
 $bd = new DbConnect();
 $conn = $bd->connect();
@@ -25,4 +32,3 @@ if (!isset($_GET['idUser'],$_GET['idArt'])) {
     header("Location: viewArticles.php?idArticle=" . $idArt);
     }
 }
-?>

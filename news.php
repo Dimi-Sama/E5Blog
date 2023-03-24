@@ -63,60 +63,63 @@ $conn = $bd->connect();
 
     <div class="container">
       <div class="news-content">
-      
-      <div class="news">
-        <?php
 
-$offset = 0;
-if(isset($_GET['page'])){
-  $page = $_GET['page'];
-  $offset = $_GET['page'] * 10;
-}else{
-    $page = 0;
-    $offset = 0;
-}
+        <div class="news">
 
-$sql = "select * from article order by datePublication DESC LIMIT 10 OFFSET :off;";
-$result = $conn->prepare($sql);
-$result->bindParam(':off',$offset,PDO::PARAM_INT);
-$result->execute();
-$count = $result->rowCount();
-        foreach ($result as $last) {
-        ?>
-<a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
-          <div class="news-image">
-            <div>
-            <img src="images/<?php echo $last['image'] ?>" alt="Image 1">
-            </div>
-            <div>
-            <h4><?php echo $last['titre'] ?></h3>
-              <?php
-              $idCat = $last['idCate'];
-              $sql = "SELECT libelle FROM categorie WHERE id= :id";
-              $req = $conn->prepare($sql);
-              $req->bindParam(':id', $idCat);
-              $req->execute();
-              $cate = $req->fetch(PDO::FETCH_ASSOC);
-              echo "<p>" . $cate['libelle'] . "</p>";
-              ?>
-              </a>
-              </div>
-          </div>
-        
-        <?php
-        }
-        if(!isset($_GET['page']) || $_GET['page'] == 0 && $count >= 10){
-          echo "<a href='?page=". $page + 1 ."'>Next</a> <br>";
-      }elseif($count < 10 && $offset > 0){
-          echo "<a  href='?page=". $page - 1 ."'>Back</a> <br>";
-      }else{
-          
-      }
-        ?>
+          <?php
+          /**
+           * Displays a list of articles with pagination.
+           */
 
+          $offset = 0;
+          if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+            $offset = $_GET['page'] * 10;
+          } else {
+            $page = 0;
+            $offset = 0;
+          }
+
+          $sql = "select * from article order by datePublication DESC LIMIT 10 OFFSET :off;";
+          $result = $conn->prepare($sql);
+          $result->bindParam(':off', $offset, PDO::PARAM_INT);
+          $result->execute();
+          $count = $result->rowCount();
+          foreach ($result as $last) {
+          ?>
+            <a href="viewArticles.php?idArticle=<?php echo $last['id'] ?>">
+              <div class="news-image">
+                <div>
+                  <img src="images/<?php echo $last['image'] ?>" alt="Image 1">
+                </div>
+                <div>
+                  <h4><?php echo $last['titre'] ?></h3>
+                    <?php
+                    $idCat = $last['idCate'];
+                    $sql = "SELECT libelle FROM categorie WHERE id= :id";
+                    $req = $conn->prepare($sql);
+                    $req->bindParam(':id', $idCat);
+                    $req->execute();
+                    $cate = $req->fetch(PDO::FETCH_ASSOC);
+                    echo "<p>" . $cate['libelle'] . "</p>";
+                    ?>
+            </a>
+        </div>
       </div>
 
-      </div>
+    <?php
+          }
+          if (!isset($_GET['page']) || $_GET['page'] == 0 && $count >= 10) {
+            echo "<a href='?page=" . $page + 1 . "'>Next</a> <br>";
+          } elseif ($count < 10 && $offset > 0) {
+            echo "<a  href='?page=" . $page - 1 . "'>Back</a> <br>";
+          } else {
+          }
+    ?>
+
+    </div>
+
+  </div>
   </div>
 
 

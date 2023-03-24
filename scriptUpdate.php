@@ -1,5 +1,7 @@
 
-<?php 
+<?php
+//Updates an article in the database with the given information.
+
 include 'lib/dbConnect.php';
 $bd = new DbConnect();
 $conn = $bd->connect();
@@ -16,13 +18,13 @@ $sql = "UPDATE article SET titre=:titre, contenu=:contenu, image = :img, idCate=
 $req = $conn->prepare($sql);
 $req->bindParam(':titre', $titre);
 $req->bindParam(':contenu', $contenu);
-$req->bindParam(':img',$img);
+$req->bindParam(':img', $img);
 $req->bindParam(':cate', $cate);
 $req->bindParam(':id', $idArt);
-if($req->execute()) {
+if ($req->execute()) {
     move_uploaded_file($_FILES['image']['tmp_name'], $repImg . $img);
     header("Location: viewArticles.php?idArticle=" . $idArt);
-}else {
+} else {
     header("Location: updatePost.php?erreur=TRUE");
 }
 

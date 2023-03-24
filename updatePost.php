@@ -86,25 +86,19 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
   </div>
 
   <script type="text/javascript" language="javascript">
-
-
     tinymce.init({
       selector: "textarea",
       width: 900,
       height: 670,
       menubar: false,
       statusbar: false,
-      extended_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
+      extended_valid_elements: "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
       plugins: 'media',
-  menubar: 'insert',
-  media_live_embeds: true
+      menubar: 'insert',
+      media_live_embeds: true
 
     });
-    
-    
   </script>
 </body>
 
 </html>
-
-

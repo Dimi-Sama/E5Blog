@@ -80,10 +80,10 @@ $bd = new DbConnect();
       height: 370,
       menubar: false,
       statusbar: false,
-      extended_valid_elements : "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
+      extended_valid_elements: "iframe[src|frameborder|style|scrolling|class|width|height|name|align]",
       plugins: 'media',
-  menubar: 'insert',
-  media_live_embeds: true
+      menubar: 'insert',
+      media_live_embeds: true
 
     })
   </script>

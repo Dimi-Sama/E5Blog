@@ -37,8 +37,8 @@
       <form action="login_register/register.php" method="post">
         <h1>Connexion</h1>
         <div class="fomulaire">
-        <div class="input">
-            <label ><b>Nom :</b></label> <br>
+          <div class="input">
+            <label><b>Nom :</b></label> <br>
             <input type="text" placeholder="Sosuke" name="nom" required>
           </div>
           <div class="input">
@@ -69,7 +69,7 @@
             <label><b>Code Postal :</b></label> <br>
             <input type="text" placeholder="xXxXx" name="codeP" required>
           </div>
-          
+
           <button type="submit">Inscription</button>
         </div>
       </form>

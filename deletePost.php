@@ -32,9 +32,9 @@ if (isset($_GET['idArticle']) && !empty($_GET['idArticle'])) {
     // récupérer l'ID de l'article à supprimer
     $idArticle = $_GET['idArticle'];
 
-  
 
-   
+
+
     // préparer la requête SQL pour supprimer l'article avec l'ID donné
     $sql = "DELETE FROM likes WHERE idArticle = :article_id; DELETE FROM commentaires WHERE idArticle = :article_id; DELETE FROM article WHERE id = :article_id";
 

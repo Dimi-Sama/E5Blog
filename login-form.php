@@ -34,7 +34,7 @@
   <?php require "lib/navbar.php" ?>
 
 
-    <div class="login-box">
+  <div class="login-box">
     <div class="left-box">
       <img src="images/10782915_19199320.jpg" alt="logo">
     </div>
@@ -47,7 +47,7 @@
         <div class="input-box">
           <input class="champspass" type="password" placeholder="Mot de passe" name="txtMdp" required>
         </div>
-        <input value="Se connecter " type="submit"/>
+        <input value="Se connecter " type="submit" />
       </form>
     </div>
   </div>

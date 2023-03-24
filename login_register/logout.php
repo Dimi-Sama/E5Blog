@@ -17,6 +17,9 @@
 ⣣⣴⣇⢸⠟⣄⣀⣸⣿⣿⣿⣿⣿⣯⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠺⣿⣦⣄⣀⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⢠⣶⣶⢿⣿⣿⣿⣟⣿⢿⣿⣿⣿⣿⣿⣿ 
 -->
 <?php
+/**
+ * Destroys the current session and redirects the user to the index page.
+ */
 session_start();
 session_destroy();
 header("Location: ../index.php");
