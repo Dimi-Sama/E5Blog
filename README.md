@@ -5,17 +5,6 @@
 Ce blog est destiné à ChizuSama_, un streamer passionné de jeux vidéo et d'anime. 
 Sur ce blog, il est possible de partager des actualités sur les jeux-vidéos, anime ou autres.
 
-## Technologies utilisées
-
-- PHP
-- SQL
-- CSS
-
-## Images
-
-![Index](lien_vers_l'image.png)
-![Acticle](lien_vers_l'image.png)
-
 ## Fonctionnalités
 
 - Affichage des derniers articles sur la page d'accueil
@@ -24,6 +13,17 @@ Sur ce blog, il est possible de partager des actualités sur les jeux-vidéos, a
 - Suppression des articles de la base de données (Modérateur)
 - Affichage des détails d'un article spécifique
 - Possibilité de commenter et liker les articles
+
+## Technologies utilisées
+
+- PHP
+- SQL
+- CSS
+
+## Images
+
+![Index](https://i.imgur.com/WBfcOzc.png)
+![Acticle](https://i.imgur.com/j1acV6f.png)
 
 ## Installation
 
