@@ -34,7 +34,7 @@ Sur ce blog, il est possible de partager des actualités sur les jeux-vidéos, a
 5. Ouvrez un navigateur et accédez à l'URL `http://localhost/E5Blog`
 
 
-## Auteur
+## Auteurs
 
 ChizuSama_ & FardeenDz
 
