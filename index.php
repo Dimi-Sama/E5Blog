@@ -29,6 +29,7 @@ $conn = $bd->connect();
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="styles/main.css">
+  <link rel="icon" type="image/x-icon" href="images/logo.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accueil</title>
 </head>
@@ -120,7 +121,7 @@ $conn = $bd->connect();
          * Displays the last three articles with their title, image and category.
          */
 
-        $sql = "select * from ( select *, row_number() over (order by datePublication DESC) RowNumber from article ) tt where RowNumber != 1 LIMIT 3";
+        $sql = "SELECT * FROM article order by datePublication DESC LIMIT 3 OFFSET 1; ";
         $result = $conn->prepare($sql);
         $result->execute();
         foreach ($result as $last) {

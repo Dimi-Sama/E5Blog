@@ -4,9 +4,9 @@
 	*/
 	class DbConnect {
 		private $server = 'localhost';
-		private $dbname = 'blog_e5';
-		private $user = 'root';
-		private $pass = '';
+		private $dbname = 'e5_blog';
+		private $user = 'user_blog';
+		private $pass = 'M0mmy_K@fk@';
 
 		public function connect() {
 			try {

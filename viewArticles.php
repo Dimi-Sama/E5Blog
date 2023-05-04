@@ -73,8 +73,9 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
             <div>
                 <h1 class="titreArticle"><?php echo $art['titre'] ?></h1>
                 <img class="viewArticle" src="images/<?php echo $art['image'] ?>" alt="Image" class="image">
-                <p class="textArticle"><?php setlocale(LC_TIME, 'fr');
-                                        echo ucfirst(strftime('%d %B %Y à %R', strtotime($art['datePublication'])));  ?></p>
+                <p class="textArticle"><?php $date = new DateTime($art['datePublication']);
+                                        $formatter = new IntlDateFormatter('fr_FR', IntlDateFormatter::FULL, IntlDateFormatter::NONE);
+                                        echo "Publié le " . $formatter->format($date);  ?></p>
                 <?php
 
 
