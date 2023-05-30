@@ -36,7 +36,7 @@ $line = $result->fetch();
 
 if (!$line) {
     // Utilisateur non trouvé ($line ne contient pas d'enregistrement)
-    header("Location: form-admin.php?emty=TRUE");
+    header("Location: ../login-form.php?empty=TRUE");
 } else {
     // Utilisateur trouvé
     $mdpBD = $line['mdp'];

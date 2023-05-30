@@ -85,7 +85,7 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
 
 
                 if (!isset($_SESSION['User'])) {
-                    echo " <div class='likes'><a  href='login-form.php'><img height='15px' src='https://cdn-icons-png.flaticon.com/512/1077/1077035.png'><p>  " . $art['likeTotal'] . "</p></a> </div>";
+                    echo " <div class='likes'><a  href='login-form.php'><img height='15px' src='https://cdn-icons-png.flaticon.com/512/1077/1077035.png' style='filter:invert(1);'><p>  " . $art['likeTotal'] . "</p></a> </div>";
                 } else {
 
                     $sql = "SELECT idUser FROM likes WHERE idArticle = :idArt";
@@ -105,17 +105,49 @@ $art = $req->fetch(PDO::FETCH_ASSOC);
                     if ($like == 'TRUE') {
                         echo " <div class='likes'> <a href='like.php?like=TRUE&idUser=" . $_SESSION["User"] . "&idArt=" . $idArt . "'><img height='15px' src='https://cdn-icons-png.flaticon.com/512/2107/2107845.png'><p>  " . $art['likeTotal'] . "</p></a> </div>";
                     } else {
-                        echo " <div class='likes'><a  href='like.php?idUser=" . $_SESSION["User"] . "&idArt=" . $idArt . "'><img height='15px' src='https://cdn-icons-png.flaticon.com/512/1077/1077035.png'><p>  " . $art['likeTotal'] . "</p></a> </div>";
+                        echo " <div class='likes'><a  href='like.php?idUser=" . $_SESSION["User"] . "&idArt=" . $idArt . "'><img height='15px' src='https://cdn-icons-png.flaticon.com/512/1077/1077035.png' style='filter:invert(1);'><p>  " . $art['likeTotal'] . "</p></a> </div>";
                     }
                 }
 
                 ?>
                 <?php echo $art['contenu'] ?>
                 <?php if (isset($_SESSION['Modo'])) {
-                    echo '<a href="updatePost.php?idArticle=' . $art['id'] . '">Modifier l\'article</a> ';
-                    echo '<a href="deletePost.php?idArticle=' . $art['id'] . '">Supprimer l\'article</a>';
+                    echo '<div class="boutart"><a  href="updatePost.php?idArticle=' . $idArt . '">Modifier l\'article</a> ';
+                    echo '<a class="boutart" href="deletePost.php?idArticle=' . $idArt . '">Supprimer l\'article</a></div>';
                 } ?>
             </div>
+        </div>
+        <div class="containerArticle">
+            <h1>Commentaires</h1>
+            <form action="scriptComment.php?idArt=<?php echo $idArt ?>" method="POST">
+                <?php
+                // Vérifier si l'utilisateur est connecté
+                if (isset($_SESSION['User'])) {
+                    echo '<textarea name="commentaire" placeholder="Saisissez votre commentaire ici"></textarea>';
+                    echo '<input type="submit" value="Ajouter un commentaire">';
+                } else {
+                    echo '<p>Veuillez vous connecter pour commenter.</p>';
+                }
+                ?>
+            </form>
+
+            <?php
+            $sql = "SELECT commentaires.*, username FROM commentaires
+                    INNER JOIN utilisateurs ON commentaires.idUser = utilisateurs.id
+                    WHERE idArticle = :idArt";
+            $req = $conn->prepare($sql);
+            $req->bindParam(':idArt', $idArt);
+            $req->execute();
+            $commentaires = $req->fetchAll(PDO::FETCH_ASSOC);
+
+            foreach ($commentaires as $commentaire) {
+                echo '<div class="commentaire">';
+                echo '<h5>' . $commentaire['username'] . '</h5>';
+                echo '<p>' . $commentaire['texte'] . '</p>';
+                echo '</div>';
+            }
+            ?>
+
         </div>
     </div>
     </div>

@@ -1,3 +1,4 @@
+
 .containerArticle {
     max-width: 900px;
     display: flex;
@@ -7,6 +8,40 @@
     text-align: center;
     background: #00000060;
     border-radius: 20px;
+    margin-bottom: 3em;
+}
+.containerArticle form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    height: 10em;
+    gap: 5%;
+    margin-bottom: 3em;
+}
+.containerArticle form input{
+    width: 30%;
+}
+.containerArticle form textarea{
+    width: 70%;
+    height: 100%;
+}
+.commentaire{
+    width: 90%;
+    display: flex;
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.342);
+}
+.commentaire h5{
+    color:rgb(219, 50, 135);
+    margin-left: 1em;
+    font-size: large;
+    font-weight: bold;
+}
+.commentaire p{
+    margin-left: 1em;
 }
 
 .titreArticle {
@@ -32,6 +67,8 @@
 .likes a {
     display: grid;
     place-items: center;
+    text-decoration: none;
+    color: white;
     grid-template-columns: repeat(2,auto);
 
 }
@@ -39,7 +76,22 @@
 .likes{
     width: 5% !important;
 }
-
+.boutart{
+    display: grid;
+    gap: 5%;
+    width: 100% !important;
+  align-content: center;
+  text-align: center;
+}
+.boutart a{
+    color: white; 
+    font-weight: bolder;
+    font-size: 2em;
+    text-decoration: none;
+    background-color: #55028d;
+    border: 0;
+    border-radius: 30px;
+}
 .textArticle {
     color: white;
     margin-top: 2rem;

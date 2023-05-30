@@ -241,10 +241,13 @@ width: 90%;
   .third-image {
     width: 30%;
     margin-bottom: 20px;
+
   }
   
   .third-image img {
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
   
   .third-image h3 {
@@ -294,7 +297,8 @@ width: 100%;
   }
   .last-actu img {
     width: 100%;
-   
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
     margin-bottom: 20px;
   }
   
@@ -332,6 +336,8 @@ width: 100%;
   }
   .right-image img {
     width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
   }
   
   

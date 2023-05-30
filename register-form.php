@@ -23,6 +23,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="stylesheet" href="styles/main-center.css">
+  <link rel="stylesheet" href="styles/connexion.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Accueil</title>
 </head>
@@ -30,50 +31,52 @@
 <body>
 
 
-  <?php require_once "lib/navbar.php" ?>
+  <?php require "lib/navbar.php" ?>
 
-  <div class="container">
-    <div class="content">
+
+  <div class="register-box">
+    <div class="left-box">
+      <img src="images/10782915_19199320.jpg" alt="logo">
+    </div>
+    <div class="right-box">
+    <?php
+if (isset($_GET['erreur']) && $_GET['erreur'] === 'TRUE') {
+    echo '<p>Une erreur est survenue. Veuillez réessayer ultérieurement. Merci.</p>';
+}
+?>
+      <h2>S'inscrire</h2>
       <form action="login_register/register.php" method="post">
-        <h1>Connexion</h1>
         <div class="fomulaire">
-          <div class="input">
-            <label><b>Nom :</b></label> <br>
-            <input type="text" placeholder="Sosuke" name="nom" required>
+          <div class="input-box">
+            <input type="text" placeholder="Nom" name="nom" required>
           </div>
-          <div class="input">
-            <label><b>Prénom :</b></label> <br>
-            <input type="text" placeholder="Aizen" name="prenom" required>
+          <div class="input-box">
+            <input type="text" placeholder="Prénom" name="prenom" required>
           </div>
-          <div class="input">
-            <label><b>Nom d'utilisateur :</b></label> <br>
-            <input type="text" placeholder=">_Destroyer_<" name="username" required>
+          <div class="input-box">
+            <input type="text" placeholder="Nom d'utilisateur" name="username" required>
           </div>
-          <div class="input">
-            <label><b>Mot de passe :</b></label> <br>
-            <input type="password" placeholder="Root1234" name="mdp" required>
+          <div class="input-box">
+            <input type="password" placeholder="Mot de passe" name="mdp" required>
           </div>
-          <div class="input">
-            <label><b>Mail :</b></label> <br>
-            <input type="email" placeholder="zoroKiller@sunny.com" name="email" required>
+          <div class="input-box">
+            <input type="email" placeholder="Mail" name="email" required>
           </div>
-          <div class="input">
-            <label><b>Adresse Rue :</b></label> <br>
-            <input type="text" placeholder="X Rue des avions" name="adrRue" required>
+          <div class="input-box">
+            <input type="text" placeholder="Adresse rue" name="adrRue" required>
           </div>
-          <div class="input">
-            <label><b>Ville :</b></label> <br>
-            <input type="text" placeholder="Night City" name="ville" required>
+          <div class="input-box">
+            <input type="text" placeholder="Ville" name="ville" required>
           </div>
-          <div class="input">
-            <label><b>Code Postal :</b></label> <br>
-            <input type="text" placeholder="xXxXx" name="codeP" required>
+          <div class="input-box">
+            <input type="text" placeholder="Code Postal" name="codeP" required>
           </div>
 
-          <button type="submit">Inscription</button>
+          <input style="margin-bottom: 1em;" value="Se connecter " type="submit" />
         </div>
       </form>
     </div>
+  </div>
 
 
 </body>

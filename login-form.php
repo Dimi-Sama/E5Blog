@@ -39,6 +39,11 @@
       <img src="images/10782915_19199320.jpg" alt="logo">
     </div>
     <div class="right-box">
+    <?php
+if (isset($_GET['empty']) && $_GET['empty'] === 'TRUE') {
+    echo '<p style="color: red;">Votre nom d\'utilisateur ou votre mot de passe est incorrect.</p>';
+}
+?>
       <h2>Connexion</h2>
       <form action="login_register/login.php" method="post">
         <div class="input-box">
