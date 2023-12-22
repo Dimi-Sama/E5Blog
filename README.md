@@ -1,5 +1,10 @@
 # Blog E5
 
+## Description
+
+Ce blog a été réalisé dans le cadre de mon projet d'épreuve E5 pour mon BTS SIO.
+Ce projet a été développé pour démontrer mes compétences en matière de développement web et de base de données.
+
 ## Contexte
 
 Ce blog est destiné à ChizuSama_, un streamer passionné de jeux vidéo et d'anime. 
@@ -36,5 +41,5 @@ Sur ce blog, il est possible de partager des actualités sur les jeux-vidéos, a
 
 ## Auteurs
 
-ChizuSama_ & FardeenDz
+DimiSama_ & FardeenDz
 
